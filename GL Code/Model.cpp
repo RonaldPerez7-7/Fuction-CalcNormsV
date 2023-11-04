@@ -70,8 +70,8 @@ void Model::DrawM() {
 	{
 		for (int j = 0; j < 3; j++) 
 		{
-			glNormal3dv(V[F[i].tri[j]].N); // Asignar las normales de los vértices
-			glVertex3dv(V[F[i].tri[j]].ver); // Dibuja el vértice
+			glNormal3dv(V[F[i].tri[j]].N); // Asignar las normales de los vÃ©rtices
+			glVertex3dv(V[F[i].tri[j]].ver); // Dibuja el vÃ©rtice
 		}
 	}
 	glEnd();
@@ -109,9 +109,9 @@ void Model::CalcNormsV()  //Funcion para calcular normales de los vertices.
 	}
 
 
-	for (int i = 0; i < nface; i++)
+	for (int i = 0; i < nface; i++) //CÃ¡lculo de las normales de las caras y acumulaciÃ³n en las normales de los vÃ©rtices.
 	{
-		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N);//Reutilizamos la función CalcNorm
+		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N);//Reutilizamos la funciÃ³n CalcNorm
 		for (int j = 0; j < 3; j++)
 		{
 			V[F[i].tri[j]].N[0] += F[i].N[0];
@@ -120,7 +120,7 @@ void Model::CalcNormsV()  //Funcion para calcular normales de los vertices.
 		}
 	}
 	
-	for (int i = 0; i < nvert; i++) // Normalizar las normales de los vértices.
+	for (int i = 0; i < nvert; i++) // Normalizar  los vÃ©rtices.
 	{
 		double norm = sqrt(V[i].N[0] * V[i].N[0] + V[i].N[1] * V[i].N[1] + V[i].N[2] * V[i].N[2]);
 		for (int j = 0; j < 3; j++)
@@ -130,11 +130,11 @@ void Model::CalcNormsV()  //Funcion para calcular normales de los vertices.
 	}
 }
 
-void Model::CalcNormsF() // //Funcion para calcular normales de las caras.
+void Model::CalcNormsF() //Funcion para calcular normales de las caras.
 {
 	for (int i = 0; i < nface; i++)
 	{
-		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N); //Reutilizamos la función CalcNorm
+		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N); //Reutilizamos la funciÃ³n CalcNorm
 	}
 }
 
