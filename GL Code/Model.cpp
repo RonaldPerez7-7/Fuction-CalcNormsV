@@ -77,7 +77,7 @@ void Model::DrawM() {
 	glEnd();
 }
 
-void Model::CalcNorm(double a[3], double b[3], double c[3], double N[3])
+void Model::CalcNorm(double a[3], double b[3], double c[3], double N[3]) //Funcion "GENERAL" para calcular las normales
 {
 	double Vab[3], Vac[3], norm;
 
@@ -97,38 +97,44 @@ void Model::CalcNorm(double a[3], double b[3], double c[3], double N[3])
 		N[i] = N[i] / norm;
 }
 
-void Model::CalcNormsV() {
-	// Inicializar todas las normales de los vértices a 0
-	for (int i = 0; i < nvert; i++) {
-		for (int j = 0; j < 3; j++) {
+void Model::CalcNormsV()  //Funcion para calcular normales de los vertices.
+{
+	
+	for (int i = 0; i < nvert; i++) 
+	{
+		for (int j = 0; j < 3; j++)
+		{
 			V[i].N[j] = 0;
 		}
 	}
 
-	// Calcular las normales de las caras y sumarlas a las normales de los vértices
-	for (int i = 0; i < nface; i++) {
-		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N);
-		for (int j = 0; j < 3; j++) {
+
+	for (int i = 0; i < nface; i++)
+	{
+		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N);//Reutilizamos la función CalcNorm
+		for (int j = 0; j < 3; j++)
+		{
 			V[F[i].tri[j]].N[0] += F[i].N[0];
 			V[F[i].tri[j]].N[1] += F[i].N[1];
 			V[F[i].tri[j]].N[2] += F[i].N[2];
 		}
 	}
-
-	// Normalizar las normales de los vértices
-	for (int i = 0; i < nvert; i++) {
+	
+	for (int i = 0; i < nvert; i++) // Normalizar las normales de los vértices.
+	{
 		double norm = sqrt(V[i].N[0] * V[i].N[0] + V[i].N[1] * V[i].N[1] + V[i].N[2] * V[i].N[2]);
-		for (int j = 0; j < 3; j++) {
+		for (int j = 0; j < 3; j++)
+		{
 			V[i].N[j] /= norm;
 		}
 	}
 }
 
-void Model::CalcNormsF() // Calcula la normal de las caras
+void Model::CalcNormsF() // //Funcion para calcular normales de las caras.
 {
 	for (int i = 0; i < nface; i++)
 	{
-		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N); //Reutilizamos la función CalcNormF
+		CalcNorm(V[F[i].tri[0]].ver, V[F[i].tri[1]].ver, V[F[i].tri[2]].ver, F[i].N); //Reutilizamos la función CalcNorm
 	}
 }
 
