@@ -1,2 +1,2 @@
 # Fuction-CalcNormsV
-Calcular las normales para los vértices.
+Figura solo calculando las normales de las caras
